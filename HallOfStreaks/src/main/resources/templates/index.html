@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall of Streaks</title>
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+  <link rel="stylesheet" th:href="@{/css/header.css}">
+  <link rel="stylesheet" th:href="@{/css/statCards.css}">
+  <link rel="stylesheet" th:href="@{/css/textEntry.css}">
+  <link rel="stylesheet" th:href="@{/css/rightColumn.css}">
+</head>
+<body>
+
+  <!-- LEFT SIDEBAR -->
+  <aside>
+    <div>
+      <div class="brand">
+        <i data-lucide="feather" style="color: var(--accent-gold);"></i>
+        <div>
+          <div class="brand-title">Hall of Streaks</div>
+          <div class="brand-subtitle">Write Today. Rise Always.</div>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <a href="#" class="nav-item active"><i data-lucide="landmark"></i> Hall of Streaks</a>
+        <a href="#" class="nav-item"><i data-lucide="square-pen"></i> Write Today</a>
+        <a href="#" class="nav-item"><i data-lucide="bar-chart-2"></i> Statistics</a>
+        <a href="#" class="nav-item"><i data-lucide="trophy"></i> Ascension Rank</a>
+        <a href="#" class="nav-item"><i data-lucide="swords"></i> Achievements</a>
+        <a href="#" class="nav-item"><i data-lucide="settings"></i> Settings</a>
+        <a href="#" class="nav-item"><i data-lucide="log-out"></i> Logout</a>
+      </nav>
+    </div>
+
+    <div class="sidebar-quote-card">
+      <img class="sidebar-quote" th:src="@{/css/Screenshot 2026-07-23 111937.png}" alt="">
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- TOP HEADER -->
+    <header>
+      <div>
+        <h1 class="welcome-title" th:text=" 'Welcome back, ' + ${name}">Welcome back, Aryan! <i data-lucide="crown" style="color: var(--accent-gold); width: 20px;"></i></h1>
+        <p class="welcome-subtitle">“Your words today, your legend tomorrow.”</p>
+      </div>
+      <div class="header-actions">
+        <div class="streak-badge">
+          <i data-lucide="flame"></i> <span th:text="${currentStreak} + ' Days Streak' ">36 Day Streak</span>
+        </div>
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Profile" class="profile-avatar">
+      </div>
+    </header>
+
+    <!-- STATS ROW -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(249,115,22,0.1); color: var(--accent-orange);"><i data-lucide="flame"></i></div>
+        <div class="stat-info">
+          <h4>Current Streak</h4>
+          <div class="stat-value" style="color: var(--accent-gold);" th:text="${currentStreak} + ' Days' ">36 Days</div>
+          <div class="stat-subtext" style="color: var(--accent-orange);">Keep it alive!</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(59,130,246,0.1); color: var(--accent-blue);"><i data-lucide="trophy"></i></div>
+        <div class="stat-info">
+          <h4>Longest Streak</h4>
+          <div class="stat-value" style="color: #60a5fa;" th:text="${longestStreak} + ' Days' ">36 Days</div>
+          <div class="stat-subtext" style="color: var(--accent-blue);">New Record!</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(34,197,94,0.1); color: var(--accent-green);"><i data-lucide="book-open"></i></div>
+        <div class="stat-info">
+          <h4>Total Words</h4>
+          <div class="stat-value" th:text="${totalWords}">45,086</div>
+          <div class="stat-subtext" style="color: var(--accent-green);">Total words written</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(139,92,246,0.1); color: var(--accent-purple);"><i data-lucide="sparkles"></i></div>
+        <div class="stat-info">
+          <h4>XP Earned</h4>
+          <div class="stat-value" th:text="${XP}">901.6</div>
+          <div class="stat-subtext" style="color: #a78bfa;">Keep writing!</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(255,255,255,0.05); color: #fff;"><i data-lucide="calendar"></i></div>
+        <div class="stat-info">
+          <h4>Days Written</h4>
+          <div class="stat-value" th:text="${daysWritten}">36</div>
+          <div class="stat-subtext" style="color: var(--text-muted);" th:text=" 'Days Missed: ' + ${daysMissed}">Days Missed: 0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div class="dashboard-layout">
+      <!-- LEFT COLUMN -->
+      <div>
+
+        <form th:action ="@{/submit}" method="post">
+          <!-- WRITING EDITOR -->
+          <div class="editor-container">
+            <div class="editor-header">
+              <div>
+                <h3><i data-lucide="feather" style="width: 16px; margin-right: 6px;"></i> Write Today</h3>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Every word counts. Your story matters.</p>
+              </div>
+              <button class="btn-tips"><i data-lucide="lightbulb" style="width: 14px;"></i> Writing Tips</button>
+            </div>
+
+            <div class="toolbar">
+              <div class="toolbar-group">
+                <button class="toolbar-btn"><b>B</b></button>
+                <button class="toolbar-btn"><i>I</i></button>
+                <button class="toolbar-btn"><u>U</u></button>
+                <button class="toolbar-btn"><s>S</s></button>
+                <button class="toolbar-btn"><i data-lucide="list" style="width: 14px;"></i></button>
+                <button class="toolbar-btn"><i data-lucide="list-ordered" style="width: 14px;"></i></button>
+              </div>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Words: 0</span>
+            </div>
+
+            <textarea placeholder="Start writing your thoughts, ideas, story or reflections..." name="paragraph"></textarea>
+
+            <!-- Self Review Section with Decimal Support -->
+            <div class="self-review-section">
+              <h3 class="section-title">⭐ Self Review</h3>
+
+              <div class="review-grid">
+                <!-- Grammar -->
+                <div class="review-item">
+                  <label for="grammar-slider">Grammar</label>
+                  <div class="slider-wrapper">
+                    <input
+                            name="grammar"
+                            type="range"
+                            id="grammar-slider"
+                            min="1"
+                            max="10"
+                            step="0.1"
+                            value="5.0"
+                            oninput="document.getElementById('grammar-num').value = parseFloat(this.value).toFixed(1)">
+
+                    <input
+                            type="number"
+                            id="grammar-num"
+                            class="score-input"
+                            min="1"
+                            max="10"
+                            step="0.1"
+                            value="5.0"
+                            oninput="document.getElementById('grammar-slider').value = this.value">
+
+                  </div>
+                </div>
+
+                <!-- Vocabulary -->
+                <div class="review-item">
+                  <label for="vocab-slider">Vocabulary</label>
+                  <div class="slider-wrapper">
+                    <input
+                            name="vocabulary"
+                            type="range"
+                            id="vocab-slider"
+                            min="1"
+                            max="10"
+                            step="0.1"
+                            value="5.0"
+                            oninput="document.getElementById('vocab-num').value = parseFloat(this.value).toFixed(1)">
+
+                    <input
+                            type="number"
+                            id="vocab-num"
+                            class="score-input"
+                            min="1"
+                            max="10"
+                            step="0.1"
+                            value="5.0"
+                            oninput="document.getElementById('vocab-slider').value = this.value">
+                  </div>
+                </div>
+
+                <!-- Flow -->
+                <div class="review-item">
+                  <label for="flow-slider">Flow</label>
+                  <div class="slider-wrapper">
+                    <input
+                            name="flow"
+                            type="range"
+                            id="flow-slider"
+                            min="1"
+                            max="10"
+                            step="0.1"
+                            value="5.0"
+                            oninput="document.getElementById('flow-num').value = parseFloat(this.value).toFixed(1)">
+                    <input
+                            type="number"
+                            id="flow-num"
+                            class="score-input"
+                            min="1"
+                            max="10"
+                            step="0.1"
+                            value="5.0"
+                            oninput="document.getElementById('flow-slider').value = this.value">
+                  </div>
+                </div>
+
+                <!-- Impact -->
+                <div class="review-item">
+                  <label for="impact-slider">Impact</label>
+                  <div class="slider-wrapper">
+                    <input
+                            name="impact"
+                            type="range"
+                            id="impact-slider"
+                            min="1"
+                            max="10"
+                            step="0.1"
+                            value="5.0"
+                            oninput="document.getElementById('impact-num').value = parseFloat(this.value).toFixed(1)">
+                    <input
+                            type="number"
+                            id="impact-num"
+                            class="score-input"
+                            min="1"
+                            max="10"
+                            step="0.1"
+                            value="5.0"
+                            oninput="document.getElementById('impact-slider').value = this.value">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="editor-actions">
+              <button class="btn-draft"><i data-lucide="save" style="width: 16px;"></i> Save Draft</button>
+              <button class="btn-submit" type="submit"><i data-lucide="rocket" style="width: 16px;"></i> Submit Entry</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="quote-banner">
+          <i data-lucide="zap" style="width: 14px;"></i> Start writing, no matter what. The water does not flow until the faucet is turned on.
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <!-- ASCENSION RANK -->
+        <div class="side-card">
+          <div class="card-title"><i data-lucide="crown" style="color: var(--accent-gold);"></i> Ascension Rank</div>
+          <div class="rank-box">
+            <h2 style="font-size: 1.2rem; font-weight: 600;" th:text="${rankName}">Silver Scribbe</h2>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Level 3</p>
+
+            <div class="progress-bar-container">
+              <div class="progress-labels">
+                <span th:text="${rankXp} + ' / 500 XP' ">901.6 / 1,500 XP</span>
+                <span th:text="${xpFilled} + '%' ">60%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" th:style= "'width: ' + ${xpFilled} + '%;'"></div>
+              </div>
+            </div>
+            
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 4px;">
+              <i data-lucide="shield" style="width: 12px; color: var(--accent-gold);"></i> Next Rank: <span style="color: var(--accent-gold);">Platinum Paladin</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- RATING OVERVIEW -->
+        <div class="side-card">
+          <div class="card-title"><i data-lucide="star" style="color: var(--accent-gold);"></i> Rating Overview</div>
+
+          <div class="rating-row">
+            <div class="rating-label">
+              <span>Grammar</span>
+              <span style="font-weight: 600;" th:text="${grammar} + ' / 10' ">8.79</span>
+            </div>
+            <div class="bar-bg">
+              <div class="bar-fill" th:style= "'width: ' + ${gP} + '%;' + 'background-color: var(--accent-green);'"></div>
+            </div>
+          </div>
+
+          <div class="rating-row">
+            <div class="rating-label">
+              <span>Vocabulary</span>
+              <span style="font-weight: 600;" th:text="${vocabulary} + ' / 10' ">9.23 </span>
+            </div>
+            <div class="bar-bg">
+              <div class="bar-fill" th:style= "'width: ' + ${vP} + '%;' + 'background-color: var(--accent-blue);'"></div>
+            </div>
+          </div>
+
+          <div class="rating-row">
+            <div class="rating-label">
+              <span>Flow</span>
+              <span style="font-weight: 600;" th:text="${flow} + ' / 10' ">9.22</span>
+            </div>
+            <div class="bar-bg">
+              <div class="bar-fill" th:style= "'width: ' + ${fP} + '%;' + 'background-color: var(--accent-purple);'"></div>
+            </div>
+          </div>
+
+          <div class="rating-row">
+            <div class="rating-label">
+              <span>Impact</span>
+              <span style="font-weight: 600;" th:text="${impact} + ' / 10' ">9.55</span>
+            </div>
+            <div class="bar-bg">
+              <div class="bar-fill" th:style= "'width: ' + ${iP} + '%;' + 'background-color: var(--accent-orange);'"></div>
+            </div>
+          </div>
+
+          <button class="btn-details">
+            <i data-lucide="bar-chart-2" style="width: 14px;"></i> View Detailed Statistics
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Lucide Icon Renderer -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

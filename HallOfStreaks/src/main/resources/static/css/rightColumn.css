@@ -1,0 +1,120 @@
+/* Right Sidebar Cards */
+    .side-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      transition: 0.5s ease;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Ascension Rank Box */
+    .rank-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.2) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .progress-bar-container {
+      margin-top: 16px;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background-color: #222;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: var(--accent-purple);
+      border-radius: 4px;
+    }
+
+    /* Ratings Overview */
+    .rating-row {
+      margin-bottom: 16px;
+    }
+
+    .rating-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    .bar-bg {
+      height: 6px;
+      background-color: #222;
+      border-radius: 3px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    .btn-details {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+
+    .side-card:hover{
+      box-shadow: 2px 2px 4px;
+    }
+
+
+/* ==========================================
+   MOBILE RESPONSIVE STYLES
+   ========================================== */
+
+@media (max-width: 768px) {
+  .side-card {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .rank-box {
+    padding: 16px;
+  }
+
+  .rank-box h2 {
+    font-size: 1.1rem !important;
+  }
+
+  .btn-details {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+}
